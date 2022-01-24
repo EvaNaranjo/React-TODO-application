@@ -1,12 +1,73 @@
 
-/* 
 
-    You can write your own styles here...
-    
-    
-    ...Or you can use the import command to include 
-    other sylesheets into your bunde as well, e.j:
-    
-    import 'relative/path/to/stylesheet.scss';
+h1{
+    font-size: 80px;
+    font-variant: small-caps;
+}
 
-*/
+.input-group{
+    margin: 20px;
+    padding: 20px;
+
+}
+.inputText{
+    margin:20px 20px 20px 60px;
+    font-size: 20px;
+}
+
+#category {
+    margin:20px;
+    max-width: 158px;
+    min-width: 50px;
+    }
+.btnSave{
+    margin:20px;
+    padding:5px;
+}
+
+.important {
+    background-color: #d62828;
+}
+
+.urgent {
+    background-color: #f77f00;
+}
+
+
+ul li {
+    background-color:white;
+    border: 1px solid grey;
+    color: black;
+    margin: auto;
+    padding-left: 10px;
+    display:flex;
+    justify-content: space-between;
+}
+
+span{
+    /*list-style: none;*/
+    position:absolute;
+    padding:0px;
+    height:20px;
+    right: 20px;   
+}
+
+.form-check{
+    position:absolute;
+    right: 50px;
+}
+
+.form-check-input{
+    display:inline;
+    margin-left: 10px;
+       
+}
+.table {
+    background-color: #eae2b7;
+    width:100px;
+    margin:auto;
+    color:grey;
+    text-transform:uppercase;
+    text-align: center;
+    font-size:12px;
+}
