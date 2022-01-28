@@ -20,7 +20,11 @@ h1{
     max-width: 158px;
     min-width: 50px;
     }
-.btnSave{
+.btnSave {
+    margin:20px;
+    padding:5px;
+}
+.btnDeleteAll{
     margin:20px;
     padding:5px;
 }
@@ -55,6 +59,10 @@ span{
 .form-check{
     position:absolute;
     right: 50px;
+}
+.form-check-label {
+    display:inline-flex;
+  
 }
 
 .form-check-input{

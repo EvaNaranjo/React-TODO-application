@@ -1,15 +1,45 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Counter from "./Counter.jsx";
 import TodoList from "./TodoList.jsx";
 import InputBlock from "./InputBlock.jsx";
+import { getTodos } from "../../service/todo.js";
+import { putTodos } from "../../service/todo.js";
 
 const Home = () => {
 	const [todoList, setTodoList] = useState([]);
 
+	const getAllTodos = () => {
+		getTodos()
+			.then((res) => {
+				return res.json();
+			})
+			.then((data) => {
+				console.log(data);
+				setTodoList(data);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
+
+	const putAllTodos = (todoList) => {
+		putTodos(todoList)
+			.then((response) => console.log("Success add:", response))
+			.catch((error) => console.log(error));
+	};
+
+	useEffect(() => {
+		getAllTodos();
+	}, []);
+
+	console.log({ todoList });
+
 	const addNewTodo = (newTodo) => {
-		newTodo.finished = false;
-		setTodoList(sortArray([...todoList, newTodo]));
+		newTodo.done = false;
+		const newList = sortArray([...todoList, newTodo]);
+		setTodoList(newList);
+		putAllTodos(newList);
 	};
 
 	const deleteTodo = (index) => {
@@ -17,11 +47,12 @@ const Home = () => {
 		newTodoList.splice(index, 1);
 		newTodoList = sortArray(newTodoList);
 		setTodoList(newTodoList);
+		putAllTodos(todoList);
 	};
 
 	const finishTodo = (index) => {
 		let newTodoList = [...todoList];
-		newTodoList[index].finished = !newTodoList[index].finished;
+		newTodoList[index].done = !newTodoList[index].done;
 		setTodoList(newTodoList);
 	};
 
@@ -62,7 +93,7 @@ const Home = () => {
 
 	var countFinishTodo = 0;
 	todoList.forEach(function (todo) {
-		if (todo.finished) {
+		if (todo.done) {
 			countFinishTodo += 1;
 		}
 	});
@@ -72,7 +103,7 @@ const Home = () => {
 	return (
 		<div>
 			<h1 className="text-center mt-5">Todos</h1>
-			<InputBlock addNewTodoIB={addNewTodo} />
+			<InputBlock addNewTodoIB={addNewTodo} onDelete={setTodoList} />
 			<TodoList
 				finishTodo={finishTodo}
 				deleteTodoCB={deleteTodo}

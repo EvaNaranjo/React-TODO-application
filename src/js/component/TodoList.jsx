@@ -21,13 +21,13 @@ const TodoList = (props) => {
 
 		return (
 			<li className={todoClass} key={index}>
-				{todoObject.text}
+				{todoObject.label}
 				<div className="form-check">
 					<input
 						className="form-check-input"
 						type="checkbox"
 						value=""
-						defaultChecked={todoObject.finished}
+						defaultChecked={todoObject.done}
 						id="flexCheckDefault"
 						onClick={() => {
 							onTodoFinishedClick(index);

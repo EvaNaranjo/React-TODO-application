@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { putTodos } from "../../service/todo.js";
 
 const InputBlock = (props) => {
 	const [inputText, setInputText] = useState("");
@@ -14,11 +15,26 @@ const InputBlock = (props) => {
 
 	const onButtonClick = (event) => {
 		var newTodo = {
-			text: inputText,
+			label: inputText,
 			category: selectText,
 		};
 		console.log(newTodo);
 		props.addNewTodoIB(newTodo);
+	};
+
+	const onButtonClickDeleteAll = (event) => {
+		const emptyList = [
+			{
+				label: "sample todo",
+				done: false,
+			},
+		];
+
+		putTodos(emptyList)
+			.then((response) => console.log("Success add:", response))
+			.catch((error) => console.log(error));
+
+		props.onDelete([]);
 	};
 
 	return (
@@ -43,6 +59,12 @@ const InputBlock = (props) => {
 				className="btn btn-primary btnSave"
 				onClick={onButtonClick}>
 				Save
+			</button>
+			<button
+				type="button"
+				className="btn btn-danger btnDeleteAll"
+				onClick={onButtonClickDeleteAll}>
+				Delete All
 			</button>
 		</div>
 	);
